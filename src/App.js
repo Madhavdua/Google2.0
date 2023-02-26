@@ -1,24 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './Components/Home';
+import Searchbar from './Components/Searchbar';
+import Navbar from './Components/Navbar';
+import All from './Components/All';
+import { useState } from 'react';
+
+import LoadingBar from 'react-top-loading-bar';
 
 function App() {
+  const [home, sethome] = useState(true)
+  const [query, setquery] = useState("")
+  const [progress, setProgress] = useState(100)
+  const page = (a, q) => {
+    if (a == true) sethome(true)
+    else {
+      sethome(false);
+      setquery(q);
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <LoadingBar
+        // height={3}
+        color='#f11946'
+        progress={progress}
+      />
+      {home && <Home page={page} query={query} />}
+      {!home && <Navbar setquery={setquery} query={query} setProgress={setProgress} />}
+
+    </>
   );
 }
 

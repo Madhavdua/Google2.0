@@ -1,21 +1,21 @@
 import React from 'react'
 import Result from './Result'
 import Home from './Home';
-import Images from './Images';
-import {
-  BrowserRouter as Router,
-  Routes as Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+// import Images from './Images';
+// import {
+//   BrowserRouter as Router,
+//   Routes as Switch,
+//   Route,
+//   Link,
+//   useRouteMatch,
+// } from "react-router-dom";
 
 export default function All(props) {
   console.log("All called")
 
   return (
     <>
-    <Router>
+    {/* <Router>
       <nav className="navbar navbar-expand-lg">
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
@@ -24,7 +24,7 @@ export default function All(props) {
             <Link className="nav-link" to="/">News</Link>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       {/* <Switch >
 
@@ -34,9 +34,10 @@ export default function All(props) {
 
       </Switch> */}
 
-    </Router>
-    <h1> i am all</h1>
-    <Images searchItem={props.searchItem} setProgress={props.setProgress}/>
+    {/* </Router> */}
+    {/* <h1> i am all</h1>
+    <Images searchItem={props.searchItem} setProgress={props.setProgress}/> */}
+    <Result searchItem={props.searchItem} setProgress={props.setProgress}/>
     </>
   )
 }

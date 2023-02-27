@@ -38,6 +38,20 @@ export default function Result(props) {
   }
 
 
+// let data=[{
+//   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
+//   position: 1,
+// title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
+// url: "https://www.cricketwireless.com/"
+// },
+// {
+//   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
+//   position: 2,
+// title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
+// url: "https://www.cricketwireless.com/"
+// }
+// ]
+
   return (
     <>
       <div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import All from './All'
+
 import { useState } from 'react';
 // import Searchbar from './Searchbar'
 export default function Home(props) {

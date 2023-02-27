@@ -1,5 +1,5 @@
 import React from 'react'
-import All from './All';
+import Result from './Result';
 import Home from './Home';
 import Searchbar from './Searchbar'
 import { useState } from 'react';
@@ -25,7 +25,7 @@ export default function Navbar(props) {
             <Searchbar searchItem={searchItem} itemchange={itemchange}  />
         </div>
         <div className="top">
-                <All searchItem={searchItem} setProgress={props.setProgress}  />
+        {/* <Result searchItem={searchItem} setProgress={props.setProgress}/> */}
             </div>
         </>
     )

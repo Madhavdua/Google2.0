@@ -7,7 +7,7 @@ import Resultitem from './Resultitem';
 export default function Result(props) {
 
   const [result, setResult] = useState([]);
-  
+
 
   useEffect(() => {
     bringData();
@@ -15,16 +15,16 @@ export default function Result(props) {
 
 
   const bringData = async () => {
-    
+
     props.setProgress(20)
     const options = await {
       method: 'GET',
-  url: 'https://google-search74.p.rapidapi.com/',
-  params: {query: `${props.searchItem}`, limit: '10', related_keywords: 'true'},
-  headers: {
-    'X-RapidAPI-Key': 'c435dfcd61mshdaece6509457ad0p14b710jsn8c4794485125',
-    'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
-  }
+      url: 'https://google-search74.p.rapidapi.com/',
+      params: { query: `${props.searchItem}`, limit: '10', related_keywords: 'true' },
+      headers: {
+        'X-RapidAPI-Key': 'c435dfcd61mshdaece6509457ad0p14b710jsn8c4794485125',
+        'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
+      }
     }
     props.setProgress(50);
     axios.request(options).then(async function (response) {
@@ -43,8 +43,8 @@ export default function Result(props) {
       <div>
         {
           result.map((element) => {
-            return <div key={result.indexOf(element)}> 
-              <Resultitem title={element.title} description={element.description.slice(0,35)} url={element.url} />
+            return <div key={result.indexOf(element)}>
+              <Resultitem title={element.title} description={element.description.slice(0, 35)} url={element.url} />
             </div>
           })
         }

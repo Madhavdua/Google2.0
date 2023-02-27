@@ -3,7 +3,7 @@ import './App.css';
 import Home from './Components/Home';
 import Searchbar from './Components/Searchbar';
 import Navbar from './Components/Navbar';
-import All from './Components/All';
+
 import { useState } from 'react';
 
 import LoadingBar from 'react-top-loading-bar';

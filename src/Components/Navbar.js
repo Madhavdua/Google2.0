@@ -28,7 +28,7 @@ export default function Navbar(props) {
         </div>
         <hr className=' mx-auto'/>
         <div className="top">
-        <Result searchItem={searchItem} setProgress={props.setProgress}/>
+        <Result apiKey={props.apiKey} searchItem={searchItem} setProgress={props.setProgress}/>
             </div>
         </>
     )

@@ -9,6 +9,8 @@ import { useState } from 'react';
 import LoadingBar from 'react-top-loading-bar';
 
 function App() {
+
+  const apiKey=process.env.REACT_APP_API_KEY
   const [home, sethome] = useState(true)
   const [query, setquery] = useState("")
   const [progress, setProgress] = useState(100)
@@ -27,7 +29,7 @@ function App() {
         progress={progress}
       />
       {home && <Home page={page} query={query} />}
-      {!home && <Navbar setquery={setquery} query={query} setProgress={setProgress} />}
+      {!home && <Navbar apiKey={apiKey} setquery={setquery} query={query} setProgress={setProgress} />}
 
     </>
   );

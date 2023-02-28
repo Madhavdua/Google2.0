@@ -22,7 +22,7 @@ export default function Result(props) {
       url: 'https://google-search74.p.rapidapi.com/',
       params: { query: `${props.searchItem}`, limit: '10', related_keywords: 'true' },
       headers: {
-        'X-RapidAPI-Key': 'c435dfcd61mshdaece6509457ad0p14b710jsn8c4794485125',
+        'X-RapidAPI-Key': `${props.apiKey}`,
         'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
       }
     }

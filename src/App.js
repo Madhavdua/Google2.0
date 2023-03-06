@@ -29,7 +29,7 @@ function App() {
         progress={progress}
       />
       {home && <Home page={page} query={query} />}
-      {!home && <Navbar apiKey={apiKey} setquery={setquery} query={query} setProgress={setProgress} />}
+      {!home && <Navbar apiKey={apiKey} setquery={setquery} query={query} setProgress={setProgress}/>}
 
     </>
   );

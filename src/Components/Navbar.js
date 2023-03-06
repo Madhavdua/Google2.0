@@ -4,8 +4,6 @@ import Home from './Home';
 import Searchbar from './Searchbar'
 import { useState } from 'react';
 
-
-let w=window.innerWidth;
 export default function Navbar(props) {
     const [searchItem, setSearchItem] = useState(props.query);
 

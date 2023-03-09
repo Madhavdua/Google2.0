@@ -34,7 +34,19 @@ export default function Result(props) {
       setResult(data);
       console.log('mai hu dta', data);
       props.setProgress(100)
-    });
+    }).catch(error=>{
+      
+      console.log(error.response.status)
+      if(error.response.status!=200){
+        let data=[{
+            description: "Try contacting owner",
+            position: 1,
+          title: "Sorry, Api limit reached",
+          url: ""
+          }]
+          setResult(data);
+      }
+    })
   }
 
 
@@ -52,6 +64,7 @@ export default function Result(props) {
 // }
 // ]
 
+
   return (
     <>
       <div>
@@ -63,6 +76,18 @@ export default function Result(props) {
           })
         }
       </div>
+
+
+      {/* for try */}
+      {/* <div>
+        {
+          data.map((element) => {
+            return <div key={element.position}>
+              <Resultitem title={element.title} description={element.description.slice(0, 35)} url={element.url} />
+            </div>
+          })
+        }
+      </div> */}
     </>
   )
 }

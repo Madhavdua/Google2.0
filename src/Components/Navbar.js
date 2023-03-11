@@ -10,6 +10,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import Navigation from './Navigation';
 
 export default function Navbar(props) {
     const [searchItem, setSearchItem] = useState(props.query);
@@ -31,10 +32,8 @@ export default function Navbar(props) {
                 </div>
                 <Searchbar searchItem={searchItem} itemchange={itemchange} />
             </div>
-            <div className="mx-5">
-            <Link to='/' className='text-decoration-none mx-4'> <i className="fa fa-search" ></i>    All</Link>
-            <Link to='/image' className='text-decoration-none'>Images</Link>
-            </div>
+                <Navigation></Navigation>
+            
             <hr className=' mx-auto' /> 
             <div className="top">
                 <Switch>

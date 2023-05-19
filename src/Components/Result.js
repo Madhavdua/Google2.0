@@ -8,7 +8,7 @@ export default function Result(props) {
 
   const [result, setResult] = useState([]);
 
-
+  const url='https://google-search74.p.rapidapi.com/'
   useEffect(() => {
     bringData();
   }, [props.searchItem])
@@ -19,8 +19,8 @@ export default function Result(props) {
     props.setProgress(20)
     const options = await {
       method: 'GET',
-      url: 'https://google-search74.p.rapidapi.com/',
-      params: { query: `${props.searchItem}`, limit: '10', related_keywords: 'true' },
+      url: url,
+      params: { query: `${props.searchItem}`, limit: '20', related_keywords: 'true' },
       headers: {
         'X-RapidAPI-Key': `${props.apiKey}`,
         'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
@@ -49,6 +49,38 @@ export default function Result(props) {
     })
   }
 
+  const addData=async()=>{
+    const options = await {
+      method: 'GET',
+      url: {url},
+      params: { query: `${props.searchItem}`, limit: '20', related_keywords: 'true' },
+      headers: {
+        'X-RapidAPI-Key': `${props.apiKey}`,
+        'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
+      }
+    }
+    axios.request(options).then(async function (response) {
+      console.log((response.data))
+      props.setProgress(70)
+      let data = await response.data.results;
+      console.log("im a m new data",data)
+      setResult([...data]);
+      console.log('mai hu dta', data);
+      props.setProgress(100)
+    }).catch(error=>{
+      
+      console.log(error.response.status)
+      if(error.response.status!=200){
+        let data=[{
+            description: "Try contacting owner",
+            position: 1,
+          title: "Sorry, Api limit reached",
+          url: ""
+          }]
+          setResult(data);
+      }
+    })
+  }
 
 // let data=[{
 //   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
@@ -76,6 +108,9 @@ export default function Result(props) {
           })
         }
       </div>
+      {/* <div className='text-center my-3' >
+          <button className='btn btn-primary' onClick={()=>{addData()}}>Show more</button>
+      </div> */}
 
 
       {/* for try */}

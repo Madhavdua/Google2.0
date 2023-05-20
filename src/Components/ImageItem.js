@@ -5,7 +5,7 @@ export default function ImageItem(props) {
 
   return (
     <>
-    <img src={url} className=""  style={{width:"23vw", maxHeight:'50vh'}} onError={(event) => event.target.style.display = 'none'}  ></img>
+    <img src={url} className=""  style={{width:"23vw", height:'30vh'}} onError={(event) => event.target.style.display = 'none'}  alt='error'></img>
     </>
   )
 }

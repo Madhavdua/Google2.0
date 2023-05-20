@@ -20,7 +20,7 @@ export default function Home(props) {
   })
 
   const width=()=>{
-    console.log(w);
+    // console.log(w);
     if(w<=500){
       setsearchWidth('20rem');
       setfontSize('2rem')}

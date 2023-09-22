@@ -1,105 +1,76 @@
-import { wait } from '@testing-library/user-event/dist/utils';
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useContext } from 'react'
 import React from 'react';
 import axios from 'axios';
+import context from '../Context/createContext'
 import Resultitem from './Resultitem';
 
 export default function Result(props) {
+  const c = useContext(context);
+  const { query, key, setProgress } = c;
 
   const [result, setResult] = useState([]);
 
-  const url='https://google-search74.p.rapidapi.com/'
+  const url = 'https://google-search74.p.rapidapi.com/'
   useEffect(() => {
     bringData();
-  }, [props.searchItem])
+  }, [query])
 
 
   const bringData = async () => {
 
-    props.setProgress(20)
+    setProgress(20)
     const options = await {
       method: 'GET',
       url: url,
-      params: { query: `${props.searchItem}`, limit: '20', related_keywords: 'true' },
+      params: { query: `${query}`, limit: '20', related_keywords: 'true' },
       headers: {
-        'X-RapidAPI-Key': `${props.apiKey}`,
+        'X-RapidAPI-Key': `${key}`,
         'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
       }
     }
-    props.setProgress(50);
+    setProgress(50);
     axios.request(options).then(async function (response) {
-      console.log((response.data))
-      props.setProgress(70)
+      // console.log((response.data))
+      setProgress(70)
       let data = await response.data.results;
       setResult(data);
-      console.log('mai hu dta', data);
-      props.setProgress(100)
-    }).catch(error=>{
-      
+      // console.log('mai hu dta', data);
+      setProgress(100)
+    }).catch(error => {
+
       console.log(error.response.status)
-      if(error.response.status!=200){
-        let data=[{
-            description: "Try contacting owner",
-            position: 1,
+      if (error.response.status != 200) {
+        let data = [{
+          description: "Try contacting owner",
+          position: 1,
           title: "Sorry, Api limit reached",
           url: ""
-          }]
-          setResult(data);
+        }]
+        setResult(data);
       }
     })
   }
 
-  const addData=async()=>{
-    const options = await {
-      method: 'GET',
-      url: {url},
-      params: { query: `${props.searchItem}`, limit: '20', related_keywords: 'true' },
-      headers: {
-        'X-RapidAPI-Key': `${props.apiKey}`,
-        'X-RapidAPI-Host': 'google-search74.p.rapidapi.com'
-      }
-    }
-    axios.request(options).then(async function (response) {
-      console.log((response.data))
-      props.setProgress(70)
-      let data = await response.data.results;
-      console.log("im a m new data",data)
-      setResult([...data]);
-      console.log('mai hu dta', data);
-      props.setProgress(100)
-    }).catch(error=>{
-      
-      console.log(error.response.status)
-      if(error.response.status!=200){
-        let data=[{
-            description: "Try contacting owner",
-            position: 1,
-          title: "Sorry, Api limit reached",
-          url: ""
-          }]
-          setResult(data);
-      }
-    })
-  }
 
-// let data=[{
-//   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
-//   position: 1,
-// title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
-// url: "https://www.cricketwireless.com/"
-// },
-// {
-//   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
-//   position: 2,
-// title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
-// url: "https://www.cricketwireless.com/"
-// }
-// ]
+
+  // let data = [{
+  //   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
+  //   position: 1,
+  //   title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
+  //   url: "https://www.cricketwireless.com/"
+  // },
+  // {
+  //   description: "Find great buys on cell phones, plans, & service at Cricket, where you get reliable nationwide coverage, affordable prepaid rates & no annual contract.",
+  //   position: 2,
+  //   title: "Prepaid Phones: No Contract Cell Phone Plans | Cricket Wireless",
+  //   url: "https://www.cricketwireless.com/"
+  // }
+  // ]
 
 
   return (
     <>
-      <div>
+      <div  style={{marginLeft:"15%",marginBottom:"30px"}}>
         {
           result.map((element) => {
             return <div key={result.indexOf(element)}>
@@ -114,7 +85,7 @@ export default function Result(props) {
 
 
       {/* for try */}
-      {/* <div>
+      {/* <div style={{marginLeft:"15%",marginRight:"5%"}}>
         {
           data.map((element) => {
             return <div key={element.position}>

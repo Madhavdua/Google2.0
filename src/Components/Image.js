@@ -1,82 +1,75 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ImageItem from './ImageItem';
 import axios from 'axios';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import context from '../Context/createContext'
+
 export default function Image(props) {
 
-  // let data=[
-  //   { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  //   id: "de00a463-3520-41nc5-b666-0f58674f7f3c",
-  //   image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  //   source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "de00a463-3520-41c5-bsdnsds6-0dvf58674f7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "de00asndfsdfs63-3520-41c5-b666-0f58674f7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "dghffhf00a463-3520-41c5-b666-0f58674f7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "dghfhf00a46f3-3520-41c5-b666-0f5sdf7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "dghfhf00a463-3520-41c5-bs666-0f5sdf7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
-  // { by:"https://unsplash.com/plus?referrer=%2Fphotos%2FEENk9naO_zk",
-  // id: "dghfhf00a463-3520-41c5-db666-0f5sdf7f3c",
-  // image:"https://plus.unsplash.com/premium_photo-1671751034172-a3974a82ed97?ixlib=rb-4.0.3&,ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  // source:"https://unsplash.com"
-  // },
+  const c = useContext(context);
+  const { query, key ,setProgress} = c;
+
+
+  let lazyBg = [
+    'https://img.freepik.com/free-photo/plain-smooth-green-wall-texture_53876-129746.jpg?w=360',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEnK3JocW1ZhE3qdDlrW_R3VaR53IYSHX0vw&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqd2bSNC32XLwkgaw1VJSiUYp8RHJjIFqiRQ&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNm8wUM5F62fBR9Pe46kJt_GcdU3lj5V7dFw&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEuanSI_jysNcFK_kY6i5o-ztb6nXyrRNWiw&usqp=CAU',
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSxcUtjSBbPiey7uKl86hEA2gbBkaI1QFeFA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSxcUtjSBbPiey7uKl86hEA2gbBkaI1QFeFA&usqp=CAU"
+  ]
+
+  // let data = [
+  //   {
+  //     image: "https://source.unsplash.com/random/tree",
+  //   },
+  //   {
+  //     image: "https://source.unsplash.com/random/water",
+  //   },
+  //   {
+  //     image: "https://source.unsplash.com/random/book",
+  //   },
+  //   {
+  //     image: "https://source.unsplash.com/random/girls",
+  //   },
+  //   {
+  //     image: "https://source.unsplash.com/random/country",
+  //   },
+  //   {
+  //     image: "https://source.unsplash.com/random/tree",
+  //   },
+
   // ]
   const [result, setresult] = useState([]);
 
-// for infi scroll
-  // const [part, setpart] = useState([]);
-  // console.log(part)
 
   useEffect(() => {
 
     bringData();
-    props.setProgress(20);
-  }, [props.searchItem]);
-  
-  
-  
+    setProgress(20);
+  }, [query]);
+
+
+
   const bringData = async () => {
-    const options = await {
+    const options = {
       method: 'GET',
       url: 'https://joj-image-search.p.rapidapi.com/v2/',
-      params: { q: `${props.searchItem}`, hl: 'en' },
+      params: { q: `${query}`, hl: 'en' },
       headers: {
-        'X-RapidAPI-Key': `${props.apiKey}`,
+        'X-RapidAPI-Key': `${key}`,
         'X-RapidAPI-Host': 'joj-image-search.p.rapidapi.com'
       }
     };
-    props.setProgress(50);
+    setProgress(50);
     axios.request(options).then(function (response) {
       // console.log(response.data.response.images);
-      props.setProgress(70);
-      props.setProgress(80);
+      setProgress(70);
+      setProgress(80);
       setresult(response.data.response.images);
-      // setpart([]);
-      // setting part
-      // setpart(part.concat(result.slice(0, 20)));
 
-      props.setProgress(100);
+      setProgress(100);
     }).catch(error => {
       console.log(error.response.status)
       if (error.response.status != 200) {
@@ -85,71 +78,42 @@ export default function Image(props) {
     })
   }
 
-  // code for infinite scroll
-  // let index = 20;
-  // const gap = 10;
-  // const [hasMore, sethasMore] = useState(true);
-  // const fetchData = () => {
-  //   if (part.length >= result.length) { sethasMore(false); return; }
-  //   setTimeout(() => {
-
-  //     setpart(part.concat(result.slice(index, index + gap)));
-  //     index += gap;
-  //     console.log("i am result      ",result)
-  //   }, 500);
-  // }
-
 
   return (
     <>
-    {/*<div className='mx-1'>
+      <div className=" d-flex flex-wrap" style={ { marginLeft: "15%" }}>
 
-       <InfiniteScroll
-        dataLength={part.length}
-        next={fetchData}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      className='d-flex flex-wrap' id="maps">
         {
-          part.map(element => {
-            return <div key={element.image.url} className="mx-1">
-              <ImageItem url={element.image.url}></ImageItem>
+           result && result.map(element => {
+            let idx = Math.floor(Math.random() * (lazyBg.length));
+            const lazyBgUrl = lazyBg[idx];
+            return <div key={result.indexOf(element)} className="p-1" >
+              <ImageItem url={element.image.url} lazyBgUrl={lazyBgUrl}></ImageItem>
             </div>
-            
           })
         }
-      </InfiniteScroll>
-    </div> */}
+      </div>
 
-
-      <div className='d-flex flex-wrap mx-2'>
-          {
-            result.map((element) => {
-              return <div key={result.indexOf(element)} className="p-1 d-flex flex-wrap ">
-                <ImageItem url={element.image.url}></ImageItem>
-              </div>
-            })
-          }
-
-        </div>
+      <div>
+        <p style={{ textAlign: 'center' }}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      </div>
 
 
       {/* for trying below */}
-      {/* <div className="mx-2 d-flex flex-wrap">
+      {/* <div className=" d-flex flex-wrap" style={window.innerWidth > '750px' ? { marginLeft: "15%", marginRight: "5%" } : { margin: "5% 2%", justifyContent: "center" }}>
 
-    {
-    data.map(element=>{
-      return <div key={data.indexOf(element)} className="p-1">
-               <ImageItem url={element.image}></ImageItem>
+        {
+          data.map(element => {
+            let idx = Math.floor(Math.random() * (lazyBg.length));
+            const lazyBgUrl = lazyBg[idx];
+            return <div key={data.indexOf(element)} className="p-1" >
+              <ImageItem url={element.image} lazyBgUrl={lazyBgUrl}></ImageItem>
             </div>
-    })
-    }
-    </div> */}
+          })
+        }
+      </div> */}
     </>
   )
 }

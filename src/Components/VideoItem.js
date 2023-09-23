@@ -6,7 +6,7 @@ function VideoItem(props) {
         <>
 
             <div className='' >
-                <a href={link} style={{textDecoration:"none"}}>
+                <a href={link} target='blank' style={{textDecoration:"none"}}>
                     <div className='mx-1 my-2' style={{ color: "blue" }}>
                         <div className='text-dark ' style={{ fontSize: "smaller" }}>
                             {link.slice(0, 20)}....
@@ -22,7 +22,7 @@ function VideoItem(props) {
                 <div className="card mb-3" style={{ maxWidth: "540px", border: "none" }}>
                     <div className="row g-0">
                         <div className="col-md-4">
-                            <a href={link} style={{textDecoration:"none"}}>
+                            <a href={link} target='_blank' style={{textDecoration:"none"}}>
 
                             <img src={v.thumbnails[0].url} className="img-fluid rounded-start" alt="..." />
                             </a>

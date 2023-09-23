@@ -3,22 +3,11 @@ import { useState, useEffect, useContext } from 'react';
 import ImageItem from './ImageItem';
 import axios from 'axios';
 import context from '../Context/createContext'
-
+import './style.css'
 export default function Image(props) {
 
   const c = useContext(context);
   const { query, key ,setProgress} = c;
-
-
-  let lazyBg = [
-    'https://img.freepik.com/free-photo/plain-smooth-green-wall-texture_53876-129746.jpg?w=360',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEnK3JocW1ZhE3qdDlrW_R3VaR53IYSHX0vw&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqd2bSNC32XLwkgaw1VJSiUYp8RHJjIFqiRQ&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNm8wUM5F62fBR9Pe46kJt_GcdU3lj5V7dFw&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEuanSI_jysNcFK_kY6i5o-ztb6nXyrRNWiw&usqp=CAU',
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSxcUtjSBbPiey7uKl86hEA2gbBkaI1QFeFA&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSxcUtjSBbPiey7uKl86hEA2gbBkaI1QFeFA&usqp=CAU"
-  ]
 
   // let data = [
   //   {
@@ -71,7 +60,7 @@ export default function Image(props) {
 
       setProgress(100);
     }).catch(error => {
-      console.log(error.response.status)
+      // console.log(error.response.status)
       if (error.response.status != 200) {
         alert('image api limit reached')
       }
@@ -81,14 +70,12 @@ export default function Image(props) {
 
   return (
     <>
-      <div className=" d-flex flex-wrap" style={ { marginLeft: "15%" }}>
+      <div className=" d-grid gallery" style={ { marginLeft: "15%" }}>
 
         {
            result && result.map(element => {
-            let idx = Math.floor(Math.random() * (lazyBg.length));
-            const lazyBgUrl = lazyBg[idx];
-            return <div key={result.indexOf(element)} className="p-1" >
-              <ImageItem url={element.image.url} lazyBgUrl={lazyBgUrl}></ImageItem>
+             return <div key={result.indexOf(element)} className="p-1" >
+               <ImageItem url={element.image.url} ></ImageItem>
             </div>
           })
         }

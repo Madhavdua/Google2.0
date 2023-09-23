@@ -70,7 +70,7 @@ export default function Image(props) {
 
   return (
     <>
-      <div className=" d-grid gallery" style={ { marginLeft: "15%" }}>
+      <div className=" d-grid gallery">
 
         {
            result && result.map(element => {

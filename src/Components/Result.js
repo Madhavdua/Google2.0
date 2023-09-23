@@ -70,7 +70,7 @@ export default function Result(props) {
 
   return (
     <>
-      <div  style={{marginLeft:"15%",marginBottom:"30px"}}>
+      <div className='' >
         {
           result.map((element) => {
             return <div key={result.indexOf(element)}>

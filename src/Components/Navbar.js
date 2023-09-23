@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import Searchbar from './Searchbar';
+import './style.css'
 
 export default function Navbar(props) {
     const [searchItem, setSearchItem] = useState(props.query);
@@ -10,7 +11,7 @@ export default function Navbar(props) {
     }
     return (
         <>
-            <div className=' mt-4 mb-3   d-flex bd-highlight mb-3 flex-wrap' style={{ fontFamily: 'Inter', fontWeight: '600', marginLeft:"50px" }}>
+            <div className='my-4  navigation-1 bd-highlight' style={{ fontFamily: 'Inter', fontWeight: '600' }}>
                 <div className="google px-4 " >
                     <a href='/' style={{ color: "#4285F4", textDecoration: 'none', fontSize: '2rem' }}>G</a>
                     <a href='/' style={{ color: "#DB4437", textDecoration: 'none', fontSize: '2rem' }}>o</a>

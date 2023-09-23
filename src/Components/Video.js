@@ -76,7 +76,7 @@ function Video() {
   return (
     <>
 
-      <div className='d-flex flex-column' style={{marginLeft:"15%",marginRight:"5%"}}>
+      <div className='d-flex flex-column'>
         {videoList.length>0 && videoList.map((v) => {
           const link = `https://www.youtube.com/watch?v=${v.channel_id}`;
           

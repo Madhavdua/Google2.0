@@ -24,7 +24,7 @@ function VideoItem(props) {
                         <div className="col-md-4">
                             <a href={link} target='_blank' style={{textDecoration:"none"}}>
 
-                            <img src={v.thumbnails[0].url} className="img-fluid rounded-start" alt="..." />
+                            <img src={v.thumbnails[0].url} style={{maxWidth:"90vw"}} className="img-fluid rounded-start" alt="..." />
                             </a>
 
                         </div>

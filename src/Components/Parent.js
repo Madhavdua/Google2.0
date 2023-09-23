@@ -32,7 +32,7 @@ function Parent(props) {
                 <div><NavBar /></div>      
             <Router>
                 <Navigation />
-                <div className="top">
+                <div className="top positon-content">
                     <Switch>
                         <Route exact path='/' element={<Result />}></Route>
                         <Route exact path='/image' element={<Image />}></Route>

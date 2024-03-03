@@ -12,7 +12,7 @@ export default function Home(props) {
 
 
   const { query, setQuery } = c;
-  const [ text, setText ] = useState('');
+  const [text, setText] = useState('');
   const [fontSize, setfontSize] = useState('5rem');
   const [searchWidth, setsearchWidth] = useState('30rem');
   const enter = (e) => {
@@ -44,8 +44,10 @@ export default function Home(props) {
   }
   return (
     <>
-
-      <div className='home-page text-center ' style={{ fontFamily: 'Inter', fontWeight: '600', overflowX: "auto" }}>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+      </style>
+      <div className='home-page text-center ' style={{ fontFamily: "Poppins", fontWeight: '500', overflowX: "auto" }}>
         <a href='/' style={{ color: "#4285F4", textDecoration: 'none', fontSize: `${fontSize}` }}>G</a>
         <a href='/' style={{ color: "#DB4437", textDecoration: 'none', fontSize: `${fontSize}` }}>o</a>
         <a href='/' style={{ color: "#F4B400", textDecoration: 'none', fontSize: `${fontSize}` }}>o</a>
@@ -60,6 +62,7 @@ export default function Home(props) {
           </div>
         </div>
       </div>
+      
     </>
   )
 }

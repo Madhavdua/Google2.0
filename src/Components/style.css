@@ -25,7 +25,15 @@
 }
 
 .home-page {
-    margin-top: 10%;
+    margin-top: 8%;
+}
+.footer-location{
+    bottom: 0;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    padding: 1vh;
+    background-color: rgb(202, 202, 202);
 }
 
 

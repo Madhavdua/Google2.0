@@ -19,7 +19,7 @@ export default function Result(props) {
   const bringData = async () => {
 
     setProgress(20)
-    const options = await {
+    const options = {
       method: 'GET',
       url: url,
       params: { query: `${query}`, limit: '20', related_keywords: 'true' },

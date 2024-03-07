@@ -3,14 +3,12 @@ import Navigation from '../Components/Navigation'
 import {
     HashRouter as Router,
     Routes as Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import NavBar from './Navbar'
 import Result from './Result'
 import Image from './Image'
 import Video from './Video'
-import Searchbar from './Searchbar'
 import LoadingBar from 'react-top-loading-bar';
 import context from '../Context/createContext';
 import Home from './Home'

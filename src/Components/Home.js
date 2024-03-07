@@ -3,7 +3,10 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import context from '../Context/createContext';
+import queryFile from './queries.json'
+import Fuse from 'fuse.js'
 import './style.css'
+import News from './News';
 
 
 export default function Home(props) {
@@ -13,22 +16,34 @@ export default function Home(props) {
 
   const { query, setQuery } = c;
   const [text, setText] = useState('');
+  const [suggestion, setSuggestion] = useState([]);
   const [fontSize, setfontSize] = useState('5rem');
   const [searchWidth, setsearchWidth] = useState('30rem');
+
+
+
   const enter = (e) => {
     if (e.keyCode === 13 && text.length > 0) {
-      console.log('enter pressed')
       setQuery(text);
+      console.log('enter pressed');
       // to be redirected to search page
       props.sethome(false);
 
     }
   }
+  useEffect(() => {
+    const result = fuse.search(text);
+    setSuggestion(result.slice(0, Math.min(result.length, 8)));
+    // console.log(suggestion);
+  }, [text])
 
 
   const w = window.innerWidth;
   useEffect(() => {
     width();
+  })
+  const fuse = new Fuse(queryFile, {
+    keys: ['query']
   })
 
   const width = () => {
@@ -38,7 +53,6 @@ export default function Home(props) {
       setfontSize('2rem')
     }
   }
-
   const writing = (v) => {
     setText(v.target.value);
   }
@@ -57,12 +71,24 @@ export default function Home(props) {
         <div className="container d-flex justify-content-center mt-5" style={{ width: `${searchWidth}` }}>
 
           <div className="input-group mb-3 ">
-            {/* <span className="input-group-text"> <i className="fa fa-search"></i></span> */}
             <input type="text" className="form-control search-1" placeholder="Search" onKeyDown={enter} value={text} onChange={writing} />
           </div>
+          { suggestion.length>0 && <div className=' suggestion-box suggestion-box-home mt-5' >
+            {
+              suggestion && suggestion.length > 0 && suggestion.map((element) => {
+                return <div key={element.refIndex} className='suggest'
+                  onMouseDown={(e) => {
+                    setText(e.target.innerText);
+                    setQuery(e.target.innerText);
+                    props.sethome(false);
+                  }}
+                >{element.item.query}</div>
+              })
+            }
+          </div>}
         </div>
       </div>
-      
+      <News/>
     </>
   )
 }

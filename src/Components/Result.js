@@ -4,7 +4,7 @@ import axios from 'axios';
 import context from '../Context/createContext'
 import Resultitem from './Resultitem';
 
-export default function Result(props) {
+export default function Result() {
   const c = useContext(context);
   const { query, key, setProgress } = c;
 
@@ -12,6 +12,7 @@ export default function Result(props) {
 
   const url = 'https://google-search74.p.rapidapi.com/'
   useEffect(() => {
+    console.log("sent q",query);
     bringData();
   }, [query])
 

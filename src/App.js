@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <AllContext>
-        <div whileHover={{ width: "fit-content", transition: { duration: .5 } }} className="name">
+        <div className="name">
           © Code by Madhav Dua
         </div>
         <Parent />

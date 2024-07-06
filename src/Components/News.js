@@ -4,7 +4,7 @@ import NewsItem from './NewsItem';
 function News() {
   const [news, setNews] = useState([]);
   const key=process.env.REACT_APP_API_KEY;
-  console.log(key);
+  // console.log(key);
   useEffect(() => {
     bringnews();
   }, [])

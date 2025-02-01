@@ -47,9 +47,11 @@ function Video() {
 
       <div className='d-flex flex-column'>
         {videoList.length > 0 && videoList.map((v) => {
-          const link = `https://www.youtube.com/watch?v=${v.video.videoId}`;
           // console.log(v.video);
-          return <div className='' key={videoList.indexOf(v)}><VideoItem v={v.video} link={link}/></div>
+          if(v.video){
+            const link = `https://www.youtube.com/watch?v=${v.video.videoId||"unable to fetch"}`;
+              return <div className='' key={videoList.indexOf(v)}><VideoItem v={v.video} link={link}/></div>
+          }
         })}
 
       </div>

@@ -3,12 +3,7 @@ import { useState } from 'react';
 import Searchbar from './Searchbar';
 import './style.css'
 
-export default function Navbar(props) {
-    const [searchItem, setSearchItem] = useState(props.query);
-
-    const itemchange = (val) => {
-        setSearchItem(val);
-    }
+export default function Navbar() {
     return (
         <>
             <div className='my-4  navigation-1 bd-highlight' style={{ fontFamily: 'Inter', fontWeight: '600' }}>

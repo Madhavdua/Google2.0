@@ -1,20 +1,16 @@
 import React from 'react'
 
 import { useState, useEffect } from 'react';
-import { useContext } from 'react';
-import context from '../Context/createContext';
 import queryFile from './queries.json'
 import Fuse from 'fuse.js'
 import './style.css'
 import News from './News';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Home(props) {
 
-  const c = useContext(context);
-
-
-  const { query, setQuery } = c;
+  const navigate = useNavigate();
   const [text, setText] = useState('');
   const [suggestion, setSuggestion] = useState([]);
   const [fontSize, setfontSize] = useState('5rem');
@@ -24,10 +20,8 @@ export default function Home(props) {
 
   const enter = (e) => {
     if (e.keyCode === 13 && text.length > 0) {
-      setQuery(text);
-      console.log('enter pressed');
       // to be redirected to search page
-      props.sethome(false);
+      navigate(`search/all?query=${text}`);
 
     }
   }
@@ -47,7 +41,6 @@ export default function Home(props) {
   })
 
   const width = () => {
-    // console.log(w);
     if (w <= 500) {
       setsearchWidth('17rem');
       setfontSize('2rem')
@@ -73,14 +66,13 @@ export default function Home(props) {
           <div className="input-group mb-3 ">
             <input type="text" className="form-control search-1" placeholder="Search" onKeyDown={enter} value={text} onChange={writing} />
           </div>
-          { suggestion.length>0 && <div className=' suggestion-box suggestion-box-home mt-5' >
+          {suggestion.length > 0 && <div className=' suggestion-box suggestion-box-home mt-5' >
             {
               suggestion && suggestion.length > 0 && suggestion.map((element) => {
                 return <div key={element.refIndex} className='suggest'
                   onMouseDown={(e) => {
-                    setText(e.target.innerText);
-                    setQuery(e.target.innerText);
-                    props.sethome(false);
+                    navigate(`search/all?query=${element.item.query}`);
+
                   }}
                 >{element.item.query}</div>
               })
@@ -88,7 +80,7 @@ export default function Home(props) {
           </div>}
         </div>
       </div>
-      <News/>
+      <News />
     </>
   )
 }

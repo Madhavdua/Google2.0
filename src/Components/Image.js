@@ -2,12 +2,11 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import ImageItem from './ImageItem';
 import axios from 'axios';
-import context from '../Context/createContext'
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import './style.css'
 export default function Image(props) {
 
-  const c = useContext(context);
-  const { query, key ,setProgress} = c;
+  const apiKey = process.env.REACT_APP_API_KEY
 
   // let data = [
   //   {
@@ -32,11 +31,17 @@ export default function Image(props) {
   // ]
   const [result, setresult] = useState([]);
 
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
+  const navigate = useNavigate();
+  if (!query) {
+    navigate('/');
+  }
 
   useEffect(() => {
 
     bringData();
-    setProgress(20);
+    // setProgress(20);
   }, [query]);
 
 
@@ -47,18 +52,18 @@ export default function Image(props) {
       url: 'https://joj-image-search.p.rapidapi.com/v2/',
       params: { q: `${query}`, hl: 'en' },
       headers: {
-        'X-RapidAPI-Key': `${key}`,
+        'X-RapidAPI-Key': `${apiKey}`,
         'X-RapidAPI-Host': 'joj-image-search.p.rapidapi.com'
       }
     };
-    setProgress(50);
+    // setProgress(50);
     axios.request(options).then(function (response) {
       // console.log(response.data.response.images);
-      setProgress(70);
-      setProgress(80);
+      // setProgress(70);
+      // setProgress(80);
       setresult(response.data.response.images);
 
-      setProgress(100);
+      // setProgress(100);
     }).catch(error => {
       // console.log(error.response.status)
       if (error.response.status != 200) {
@@ -73,9 +78,9 @@ export default function Image(props) {
       <div className=" d-grid gallery">
 
         {
-           result && result.map(element => {
-             return <div key={result.indexOf(element)} className="p-1" >
-               <ImageItem url={element.image.url} ></ImageItem>
+          result && result.map(element => {
+            return <div key={result.indexOf(element)} className="p-1" >
+              <ImageItem url={element.image.url} ></ImageItem>
             </div>
           })
         }

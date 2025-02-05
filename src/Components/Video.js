@@ -1,20 +1,25 @@
 import React from 'react'
 import VideoItem from './VideoItem'
 import { useState, useEffect } from 'react';
-import context from '../Context/createContext';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 function Video() {
+  const key = process.env.REACT_APP_API_KEY
 
-  const c = useContext(context);
-  const { query, key, setProgress } = c;
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
+  const navigate = useNavigate();
+  if (!query) {
+    navigate('/');
+  }
   useEffect(() => {
     bringVideo();
   }, [query])
   const [videoList, setVideoResult] = useState([]);
 
   const bringVideo = async () => {
-    setProgress(20);
+    // setProgress(20);
 
     const options = {
       method: 'GET',
@@ -28,29 +33,25 @@ function Video() {
         'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
       }
     };
-    setProgress(50);
+    // setProgress(50);
 
     let response = await axios.request(options);
-    setProgress(70);
+    // setProgress(70);
 
     // console.log(response.data.contents);
     setVideoResult(response.data.contents);
-    setProgress(90);
-    setProgress(100);
+    // setProgress(90);
+    // setProgress(100);
   }
 
   return (
     <>
-
-
-
-
       <div className='d-flex flex-column'>
         {videoList.length > 0 && videoList.map((v) => {
           // console.log(v.video);
-          if(v.video){
-            const link = `https://www.youtube.com/watch?v=${v.video.videoId||"unable to fetch"}`;
-              return <div className='' key={videoList.indexOf(v)}><VideoItem v={v.video} link={link}/></div>
+          if (v.video) {
+            const link = `https://www.youtube.com/watch?v=${v.video.videoId || "unable to fetch"}`;
+            return <div className='' key={videoList.indexOf(v)}><VideoItem v={v.video} link={link} /></div>
           }
         })}
 
